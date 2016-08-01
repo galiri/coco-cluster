@@ -1,0 +1,5 @@
+services:
+- name: my-app@.service
+  count: 1
+- name: tunnel-registrator.service
+  uri: https://raw.githubusercontent.com/Financial-Times/up-service-files/master/tunnel-registrator.service

@@ -1,0 +1,12 @@
+[Unit]
+Description=MyApp
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill %p-%i
+ExecStartPre=-/usr/bin/docker rm %p-%i
+ExecStartPre=/usr/bin/docker pull busybox
+ExecStart=/usr/bin/docker run --name %p-%i busybox /bin/sh -c "trap 'exit 0' INT TERM; while true; do echo Hello World; sleep 3; done"
+ExecStop=/usr/bin/docker stop %p-%i
